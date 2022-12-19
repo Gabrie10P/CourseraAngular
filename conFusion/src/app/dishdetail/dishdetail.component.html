@@ -18,14 +18,16 @@
     </div>
     <div class="details-item">
         <h3>Comments</h3>
-        <mat-list class="lista">
-            <mat-list-item class="items" *ngFor="let com of dish.comments">
-                <span>{{com.comment}</span>
-                <br>
-                <span>{{com.rating}}</span>
-                <br>
-                <span>{{com.author}} {{com.date}}</span>
-            </mat-list-item>
-        </mat-list>
+                <mat-list class="lista">
+                        <mat-list-item class="items" *ngFor="let com of dish.comments">
+                            <div class="item">
+                                <span matListItemLine>{{com.comment}}</span>
+                                <span matListItemLine>{{com.rating}} stars</span>
+                                <span matListItemLine>-- {{com.author}} {{com.date}}</span>
+                            </div>
+                            
+                        </mat-list-item>
+                </mat-list>
+        
     </div>
 </div>
