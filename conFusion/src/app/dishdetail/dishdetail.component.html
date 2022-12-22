@@ -1,7 +1,7 @@
-<div class="container-details">
+<div class="container-details" *ngIf="dish">
     <div class="details-item" >
-        <mat-card>
-            <mat-card-header>
+        <mat-card >
+            <mat-card-header >
                 <mat-card-title>
                     <h3>{{dish.name | uppercase}}</h3>
                 </mat-card-title>
