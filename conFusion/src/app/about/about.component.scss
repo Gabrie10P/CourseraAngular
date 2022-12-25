@@ -1,0 +1,27 @@
+.about-content{
+    display: flex;
+    flex-direction: row;
+}
+
+.about-history{
+    width: 70%;
+}
+
+.about-card{
+    width: 30%;
+}
+
+.leader-list{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.leader-image{
+    margin-top: 30px;
+}
+
+.list-item{
+    position: relative;
+    margin-top: 0;
+}
