@@ -5,7 +5,7 @@
             <hr>
         </div>
     </div>
-    <div class="section-details">
+    <div  class="section-details" *ngIf="dish" >
         <div class="details-item" >
             <mat-card >
                 <mat-card-header >
@@ -18,24 +18,33 @@
                     <p>{{dish.description}}</p>
                 </mat-card-content>
                 <mat-card-actions>
+                    <button mat-button [routerLink]="['/dishdetail', prev]"><span class="bi bi-chevron-left"></span></button>
                     <button mat-button (click)="goBack()">BACK</button>
                     <button mat-button>LIKE</button>
                     <button mat-button>SHARE</button>
+                    <button mat-button [routerLink]="['/dishdetail', next]"><span class="bi bi-chevron-right"></span></button>
                 </mat-card-actions>
             </mat-card>
         </div>
-        <div class="details-item">
+        
+        <div  class="details-item">
             <h3>Comments</h3>
-                    <mat-list class="lista">
-                            <mat-list-item class="items" *ngFor="let com of dish.comments">
-                                <div>
-                                    <span matListItemLine>{{com.comment}}</span>
-                                    <span matListItemLine>{{com.rating}} stars</span>
-                                    <span matListItemLine>-- {{com.author}} {{com.date}}</span>
-                                </div>
-                            </mat-list-item>
-                    </mat-list>
+            <mat-list class="lista">
+                <mat-list-item class="items" *ngFor="let com of dish.comments">
+                    <div>
+                        <span matListItemLine>{{com.comment}}</span>
+                        <span matListItemLine>{{com.rating}} stars</span>
+                        <span matListItemLine>-- {{com.author}} {{com.date}}</span>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <div [hidden]="dish">
+            <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
         </div>
     </div>
-
+    <div [hidden]="dish">
+        <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+    </div>
+    
 </div>
