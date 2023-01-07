@@ -42,8 +42,6 @@ export class ContactComponent implements OnInit{
 
   @ViewChild('fform') feedbackFormDirective;
 
-
-
   constructor(private fb: FormBuilder) {
     this.createForm();
   }
@@ -51,7 +49,7 @@ export class ContactComponent implements OnInit{
   ngOnInit() {
   }
 
- createForm(): void {
+createForm(){
   this.feedbackForm = this.fb.group({
     firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
     lastname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
@@ -61,6 +59,7 @@ export class ContactComponent implements OnInit{
     contacttype: 'None',
     message: ''
   });
+  
   this.feedbackForm.valueChanges
   .subscribe(data => this.onValueChanged(data));
 

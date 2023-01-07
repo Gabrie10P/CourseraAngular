@@ -26,7 +26,6 @@
                 </mat-card-actions>
             </mat-card>
         </div>
-        
         <div  class="details-item">
             <h3>Comments</h3>
             <mat-list class="lista">
@@ -38,13 +37,42 @@
                     </div>
                 </mat-list-item>
             </mat-list>
-        </div>
-        <div [hidden]="dish">
-            <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+            <div>
+                <p>{{commentForm.value | json}}</p>
+                <form  novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Author</mat-label>
+                            <input matInput formControlName="author" placeholder="Author" ngModel="" value="" required>
+                            <mat-error *ngIf="formErrors.author">{{ formErrors.author }}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Rating</mat-label>
+                            <mat-slider min="1" max="5" step="0.5" value="1.5">
+                                <input matSliderThumb>
+                            </mat-slider>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Comments</mat-label>
+                            <textarea matInput formControlName="comment" placeholder="Your comment" required></textarea>
+                            <mat-error *ngIf="formErrors.comment" >{{ formErrors.comment }}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field>
+                            <button mat-raised-button color="primary" type="submit">Enviar</button>
+                        </mat-form-field>
+                    </div>
+                </form>
+            </div>
+            
         </div>
     </div>
     <div [hidden]="dish">
         <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
     </div>
-    
 </div>
