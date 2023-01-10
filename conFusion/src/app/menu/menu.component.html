@@ -10,7 +10,7 @@
     <div fxFlex *ngIf="dishes"><!--Flex-layout de angular está deprecado por lo que no funciona-->
         <mat-grid-list cols="2" rowHeight="200px">
             <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]">
-            <img height="200px" src={{dish.image}} alt={{dish.name}}>
+            <img height="200px" src="{{BaseURL + dish.image}}" alt={{dish.name}}>
             <mat-grid-tile-footer>
                 <h1> {{dish.name | uppercase}} </h1>
             </mat-grid-tile-footer>
@@ -20,7 +20,7 @@
     <div [hidden]="dishes">
     <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
   </div>
-    <app-dishdetail [dish]="selectedDish"></app-dishdetail>
+    <!-- <app-dishdetail [dish]="selectedDish"></app-dishdetail> -->
     
 
 </div>

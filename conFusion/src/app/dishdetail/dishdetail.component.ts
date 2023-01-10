@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Inject } from '@angular/core';
 import { DishService } from '../services/dish.service';
 import { Dish } from '../shared/dish';
 import { DISHES } from '../shared/dishes';
@@ -27,6 +27,7 @@ export class DishdetailComponent implements OnInit{
   dishIds: string[];
   prev: string;
   next: string;
+  BaseURL;
 
   formErrors = {
     'author': '',
@@ -51,8 +52,10 @@ export class DishdetailComponent implements OnInit{
   constructor(private dishservice: DishService,
     private route: ActivatedRoute,
     private location: Location,
+    @Inject('BaseURL') private baseUrl,
     private fb: FormBuilder){
       this.createForm();
+      this.BaseURL = baseUrl;
     }
 
   ngOnInit(){
