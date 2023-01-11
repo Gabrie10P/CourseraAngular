@@ -42,8 +42,12 @@
       <p>{{leader.description}}</p>
     </mat-card-content>
   </mat-card>
-  <div [hidden]="dish">
+  <div [hidden]="dish || dishErrMsg">
     <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  <div *ngIf="dishErrMsg">
+    <h2>Error</h2>
+    <h4>{{dishErrMsg}}</h4>
   </div>
   <div [hidden]="promotion">
     <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>

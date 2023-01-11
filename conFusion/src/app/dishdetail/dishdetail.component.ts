@@ -8,9 +8,6 @@ import { switchMap } from 'rxjs/operators';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Comment } from '../shared/comment';
 
-
-
-
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
@@ -28,6 +25,7 @@ export class DishdetailComponent implements OnInit{
   prev: string;
   next: string;
   BaseURL;
+  dishErrMsg: string;
 
   formErrors = {
     'author': '',
@@ -59,9 +57,9 @@ export class DishdetailComponent implements OnInit{
     }
 
   ngOnInit(){
-    this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
+    this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds, errMsg => this.dishErrMsg = <any>errMsg);
     this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-    .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
+    .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id) }, errMsg => this.dishErrMsg = <any>errMsg);
   }
 
   createForm(){
@@ -124,5 +122,6 @@ export class DishdetailComponent implements OnInit{
       }
     }
   }
+
 
 }

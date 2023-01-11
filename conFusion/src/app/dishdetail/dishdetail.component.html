@@ -44,7 +44,10 @@
                         <mat-form-field class="example-full-width">
                             <mat-label>Author</mat-label>
                             <input matInput formControlName="author" placeholder="Author" ngModel="" value="" required>
-                            <mat-error *ngIf="formErrors.author">{{ formErrors.author }}</mat-error>
+                            <mat-error *ngIf="formErrors.author">
+                                
+                                {{ formErrors.author }}
+                            </mat-error>
                         </mat-form-field>
                     </div>
                     <div>
@@ -72,7 +75,11 @@
             
         </div>
     </div>
-    <div [hidden]="dish">
+    <div [hidden]="dish || dishErrMsg">
         <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
     </div>
+    <div fxFlex *ngIf="dishErrMsg">
+        <h2>Error</h2>
+        <h4>{{dishErrMsg}}</h4>
+      </div>
 </div>
