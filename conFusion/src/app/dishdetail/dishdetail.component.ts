@@ -26,6 +26,9 @@ export class DishdetailComponent implements OnInit{
   next: string;
   BaseURL;
   dishErrMsg: string;
+  dishCopy: Dish;
+
+  
 
   formErrors = {
     'author': '',
@@ -59,9 +62,11 @@ export class DishdetailComponent implements OnInit{
   ngOnInit(){
     this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds, errMsg => this.dishErrMsg = <any>errMsg);
     this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-    .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id) }, errMsg => this.dishErrMsg = <any>errMsg);
+    .subscribe(dish => { this.dish = dish; this.dishCopy = dish ;this.setPrevNext(dish.id) }, errMsg => this.dishErrMsg = <any>errMsg);
+    
   }
 
+  
   createForm(){
     this.commentForm = this.fb.group({
       autor: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
@@ -95,6 +100,13 @@ export class DishdetailComponent implements OnInit{
     this.comentario = this.commentForm.value;
     this.addComment(this.comentario);
     console.log(this.comentario);
+    this.dishCopy.comments.push(this.comentario);
+    this.dishservice.putDish(this.dishCopy).subscribe(dish => {
+      this.dish = dish; this.dishCopy = dish
+    },
+    errMsg => {this.dish == null; this.dishCopy == null; this.dishErrMsg = <any>errMsg;}
+    );
+
     this.commentForm.reset({
       author: '',
       comment:'',
