@@ -1,17 +1,29 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
+import { visibility,flyInOut, expand } from '../animations/app.animation';
+import { FeedbackService } from '../services/feedback.service';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  styleUrls: ['./contact.component.scss'],
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+    },
+    animations: [
+      visibility(),
+      flyInOut(),
+      expand()
+    ]
 })
 export class ContactComponent implements OnInit{
 
   feedbackForm: FormGroup;
   feedback: Feedback;
   contactType = ContactType;
+  respuesta;
   formErrors = {
     'firstname': '',
     'lastname': '',
@@ -42,7 +54,8 @@ export class ContactComponent implements OnInit{
 
   @ViewChild('fform') feedbackFormDirective;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+    private feedbackService: FeedbackService) {
     this.createForm();
   }
 
@@ -66,9 +79,24 @@ createForm(){
   this.onValueChanged();
   }
 
-  onSubmit() {
+  // onSubmit() {
+  //   this.feedback = this.feedbackForm.value;
+  //   this.feedbackService.putFeedback(this.feedback).subscribe(feedback => this.feedback = feedback)
+  //   this.feedbackForm.reset({
+  //     firstname: '',
+  //     lastname: '',
+  //     telnum: '',
+  //     email: '',
+  //     agree: false,
+  //     contacttype: 'None',
+  //     message: ''
+  //   });
+  //   this.feedbackFormDirective.resetForm();
+  // }
+
+  submitFeedback(){
     this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
+    this.respuesta = this.feedbackService.postFeedback(this.feedback).subscribe(feedback => this.feedback = feedback);
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',
@@ -80,6 +108,7 @@ createForm(){
     });
     this.feedbackFormDirective.resetForm();
   }
+
 
   onValueChanged(data?: any) {
     if (!this.feedbackForm) { return; }

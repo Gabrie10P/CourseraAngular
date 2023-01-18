@@ -9,7 +9,7 @@
     </div>
   </div>
 
-  <div fxFlex>
+  <div fxFlex  [@expand]>
     <h3>Location Information</h3> 
     <div fxLayout="column" fxLayout.gt-sm="row" class="contact">
       <div fxFlex="50" fxFlexOffset="20px" class="contact-items">
@@ -35,11 +35,11 @@
       </div>
     </div>
   </div>
-  <div fxFlex fxFlexOffset="20px" class="form-size">
+  <div fxFlex fxFlexOffset="20px" class="form-size"  [@expand]>
     <h3>Send us your Feedback</h3>
     <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
 
-    <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+    <form novalidate [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
       <div>
         <mat-form-field class="half-width">
           <input matInput formControlName="firstname" placeholder="First Name" type="text" required>
@@ -87,5 +87,9 @@
       </div>
       <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
     </form>
+    <div [hidden]="feedbackForm">
+      <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+    </div>
   </div>
+  
 </div>

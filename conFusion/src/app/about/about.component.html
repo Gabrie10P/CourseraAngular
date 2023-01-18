@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div>
+    <div  [@expand]>
         <div fxLayout="column" fxLayout.gt-sm="row" class="about-content">
             <div class="about-history">
                 <h2>Our History</h2>
@@ -40,7 +40,7 @@
         </div>
     </div>
     
-    <div fxFlex>
+    <div fxFlex  [@expand]>
         <mat-card>
         <blockquote>
             <h3>You better cut the pizza in four pieces because
@@ -53,12 +53,12 @@
         </mat-card>
     </div>
 
-    <div fxFlex *ngIf="leaders">
+    <div fxFlex *ngIf="leaders"  [@expand]>
         <h2>Corporate Leadership</h2>
         <mat-list class="lista-lider">
             <mat-list-item *ngFor="let leader of leaders" class="leader-list">
             
-                <img matListItemAvatar src={{leader.image}} class="leader-image">
+                <img matListItemAvatar src="{{BaseURL + leader.image}}" class="leader-image">
             
                 <div class="list-item">
                     <span matListItemLine>{{leader.name}} {{leader.abbr}} </span>
